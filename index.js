@@ -1,8 +1,11 @@
 require("dotenv").config();
 const app = require("./app");
 const mongoose = require("mongoose");
+const axios = require("axios");
+const Tickets = require("./tickets")
+
 const env = process.env.NODE_ENV || "production";
-const MONGO_URI =
+const MONGO_URI = process.env.MONGO_URI
   env === "test" ? process.env.TEST_MONGO_URI : process.env.MONGO_URI;
 const PORT = process.env.PORT || 8080;
 
@@ -22,3 +25,5 @@ mongoose
   .catch((error) => {
     console.log("error connecting to MongoDB:", error.message);
   });
+  
+

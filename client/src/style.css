@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.tickets{
+    color: rgb(80, 112, 121);
+    margin: 30px auto;
+    width: 80%;
+    box-shadow: 5px 10px 18px #9e9797;
+    padding: 30px;
+    padding-top: 14px;
+    background-color: white;
+    border-radius: 10px;
+}
+.bottomline{
+    font-size: 12px;
+    color:black;
+}
+.content{
+        overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
