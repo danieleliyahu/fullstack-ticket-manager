@@ -24,8 +24,17 @@
     -webkit-box-orient: vertical;
 }
 .ticketClosed{
-    background-color:blue
+    background-color:blue;
+    width: fit-content;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 .ticketOpen{
-    background-color:yellow
+    background-color:yellow;
+    width: fit-content;
+    -webkit-line-clamp: 10000;
+    -webkit-box-orient: vertical;
+}
+.hidden{
+    display: none;
 }
