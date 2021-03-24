@@ -23,3 +23,9 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+.ticketClosed{
+    background-color:blue
+}
+.ticketOpen{
+    background-color:yellow
+}
