@@ -1,67 +1,106 @@
-import React, { useEffect, useState ,useRef} from 'react';
+import React, { useEffect, useState ,useCallback } from 'react';
 import axios from 'axios';
-import Tickets from "./components/Tickets";
+import Tickets1 from "./components/Tickets1";
 import './style.css';
 function App() {
-  const [tickets, settickets] = useState(null)
+  const [tickets, setTickets] = useState([]); 
   const [seeMoreAndLess, setseeMoreAndLess] = useState('show more')
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState()
   const [SearchValue, setSearchValue] = useState('')
   const [count, setcount] = useState(0)
+  const [restore, setrestore] = useState(0)
    const changeValue = (e) => {
     const newValue = e.target.value;
     setValue(newValue)
   }
-  const setSearchValueFunc = () =>{
-    setSearchValue(value)
-  }
-  const counter = (e) =>{
-    e.target.parentNode.className = "hidden"
-   let x= count + 1
-    setcount(x)
+
+
+    const restoreFunc = () =>{
+      setrestore(restore+1)
+    }
+  const connectReview = (e,setContentClass) =>{
+    if(e.target.innerText === 'show more'){
+      e.target.innerText = 'show less'
+      setContentClass(' contentOpen')
+     
+      // setseeMoreAndLess('show less')
+    // return  setseeMoreButtonClass('ticketClose')
+    }else{
+      e.target.innerText = 'show more'
+      setContentClass('content contentClose')
+    }
   }
   useEffect(() => {
     // if(value !== undefined){
 
     // }
-    const connectReview = (e) =>{
-      if(e.target.innerText === 'show more'){
-        e.target.innerText = 'show less'
-        e.target.parentNode.className="tickets ticketClosed"
-       
-        // setseeMoreAndLess('show less')
-      // return  setseeMoreButtonClass('ticketClose')
-      }else{
-        e.target.innerText = 'show more'
-        e.target.parentNode.className="tickets ticketOpen"
-      }
-    }
-    axios.get(`/api/tickets?searchText=${SearchValue}`)
+    console.log('hiiiiiiiiiiiiiii')
+    axios.get(`/api/tickets`)
     .then(({data})=>{
-      let ticketData = data;
-     let x = ticketData.map((x,i)=>{
-      let dateFormat = new Date(x.creationTime).toLocaleString();
-        return(
-          <div className="tickets" key={i}>
-            <button id="hidebutton" onClick={counter}>hide</button>
-            <h3 className="title"> {x.title}</h3>
-            <p className="content" > {x.content}</p>
-            <p className="done"> {x.done}</p>
-            <div key={i} onClick={(e) =>(connectReview(e))}>{seeMoreAndLess}</div>
-            <span className="bottomline userEmail"> by {x.userEmail}  </span>
-            <span className="bottomline creationTime"> {dateFormat}</span>
-            <p className="label"> {x.labels.map((c)=>{return `${c} `})}</p>
-          </div> 
-     )})
-      settickets(x)
+      console.log(data)
+      setTickets(data)
     })
-  },[seeMoreAndLess,SearchValue])
+  },[])
 
-console.log(tickets)
+  useEffect(() => {
+    // if(value !== undefined){
+
+    // }
+    axios.get(`/api/tickets?searchText=${value}`)
+    .then(({data})=>{
+      console.log('hiiiiiiii')
+      setTickets(data)
+    })
+  },[value])
+  // const addCount = () => { //count function that will be used in the ticket componenet to update the count of hidden tickets
+  //   setCounter((prev) => prev + 1);
+  // };
+  // const restore = async () => { //restore function to display hidden tickets
+  //   setCall((prev) => prev + 1);
+  //   setCounter(0);
+  // };
+  // const hiddenItems = () => { //if there is hidden tickets displayng the count of them and button to restore them
+  //   if (counter === 0) {
+  //     return '';
+  //   }
+  //   return (
+  //     <span className="counterHidden">
+  //       &nbsp;
+  //       (&nbsp;
+  //       <span id="hideTicketsCounter" className="hideTicketsCounter">{counter}</span>
+  //       &nbsp;
+  //       hidden tickets -
+  //       <button onClick={restore} id="restoreHideTickets">restore</button>
+  //       )
+  //     </span>
+  //   );
+  // };
+// console.log(tickets)
   return (
     <div className="App">
       {count}
-     <Tickets tickets = {tickets} changeValue={changeValue} value={value} setValue={setValue}  setSearchValueFunc={setSearchValueFunc}/>
+      <input onChange={(e) =>((changeValue(e)))} ></input>
+      <button onClick={restoreFunc}>restore</button>
+      {tickets.map((x,i)=>{
+        return(
+        <Tickets1 
+        content={x.content}
+          title={x.title}
+          date={x.creationTime}
+          labels={x.labels}
+          done={x.done}
+          userEmail={x.userEmail}
+          seeMoreAndLess={seeMoreAndLess}
+          setseeMoreAndLess={setseeMoreAndLess}
+          count={count}
+          connectReview={connectReview}
+          key={i}
+          restore={restore}
+          restoreFunc={restoreFunc}
+          setcount={setcount}
+          ticket={x}
+          />)
+      })}
     </div>
   );
 }

@@ -10,19 +10,26 @@ app.use(express.static("client/build"));
 // res.send(tickets)
 app.get('/api/tickets',async(req,res,next) => {
     const params = new URLSearchParams(req.query)
-    console.log(`${params}    params`)
-    console.log(`${req.query}      req.query`)
-    if(!params){
+    console.log(params.toString())
+    console.log("????")
+
+    if(params.toString()=== ""){
+      // console.log(`${params}    params`)
+      // console.log(`${req.query}      req.query`)
         const tickets = await Tickets.find({});
+        console.log("dsssdsd")
         // console.log(tickets)
+        
         return res.send(tickets)
     }else{
         const tickets = await Tickets.find({title:{$regex : `.*${params.get('searchText')}.*`}});
         // const myParam = urlParams.get('myParam');
-        console.log(`${params} PARAMSSSS`)
+        console.log(tickets.length+100)
+        // console.log(`hhhhhhhhhhhhhhh ${tickets.length}`)
+        // console.log(`${params} PARAMSSSS`)
         for (const [key,value] of params) {
-            // console.log(key)
-            // console.log(value)
+            console.log("ggg"+ key)
+            console.log(value)
           }
           return res.send(tickets)
     }
@@ -38,8 +45,10 @@ app.patch('/api/tickets/:ticketId',async(req,res)=>{
     const tickets = await Tickets.findById({_id:ticketId });
     if(tickets.done === true){
        tickets.done =  false
+       console.log(tickets.done)
     }else{
        tickets.done =  true
+       console.log(tickets.done)
     }
     await tickets.save();
     res.send(tickets)
