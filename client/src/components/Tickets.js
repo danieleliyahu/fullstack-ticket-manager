@@ -3,7 +3,8 @@ import axios from 'axios';
 import '../style.css';
 const Tickets = ({content,title,date,labels,done,userEmail,seeMoreAndLess,
     setseeMoreAndLess,connectReview,key,restore,restoreFunc,ticket,setcount,count}) => {
-        let dateFormat = new Date(date.creationTime).toLocaleString();
+        let dateFormat = new Date(date).toLocaleString();
+        console.log(dateFormat)
         const [contentClass, setContentClass] = useState('content contentClose')
         const [ticketClass, setticketClass] = useState('ticket')
         const [doneClass, setdoneClass] = useState('undone')
