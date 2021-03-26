@@ -35,11 +35,7 @@ app.get('/api/tickets',async(req,res,next) => {
           return res.send(tickets)
     }
   })
-app.get('/api/tickets',async(req,res,next) => {
-    const tickets = await Tickets.find({});
-    console.log('tickets')
-    return res.send(tickets)
-  })
+
 app.patch('/api/tickets/:ticketId',async(req,res)=>{
     const ticketId = req.params.ticketId
     console.log(ticketId)
@@ -54,7 +50,5 @@ app.patch('/api/tickets/:ticketId',async(req,res)=>{
     await tickets.save();
     res.send(tickets)
 })
-app.get('/api',(req,res) => {
-res.send('hi')
-})
+
 module.exports = app;
