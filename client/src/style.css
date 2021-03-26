@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.ticket{
+    color: rgb(80, 112, 121);
+    margin: 30px auto;
+    width: 80%;
+    box-shadow: 5px 10px 18px #9e9797;
+    padding: 30px;
+    padding-top: 14px;
+    background-color: white;
+    border-radius: 10px;
+}
+.bottomline{
+    font-size: 12px;
+    color:black;
+}
+.content{
+        overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.contentClose{
+    width: fit-content;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.contentOpen{
+    width: fit-content;
+    -webkit-line-clamp: 10000;
+    -webkit-box-orient: vertical;
+}
+.hiden{
+    display: none;
+}
+.done{
+    background-color: #008000a8;
+    color: rgb(53 68 72);
+}
+.undone{
+    background-color: #ff0000a6;
+}
+.restore{
+    color: rgb(80, 112, 121);
+    font-size: 0.7em;
+}
+.restoreButton{
+    border: none;
+    background-color:white;
+    color:blue;
+    outline: none;
+    cursor: pointer;
+}
+.headerDiv{
+    text-align: center;
+}
+span + span {
+    margin-left: 10px;
+}
+.show{
+    color: blue;
+    cursor: pointer;
+}
+.hideTicketButton {
+    display: block;
+    border: none;
+    background: none;
+    margin-left: auto;
+    outline: none;
+    cursor: pointer;
+}
