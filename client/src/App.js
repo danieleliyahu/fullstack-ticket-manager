@@ -1,6 +1,6 @@
 import React, { useEffect, useState ,useCallback } from 'react';
 import axios from 'axios';
-import Tickets1 from "./components/Tickets1";
+import Tickets from "./components/Tickets";
 import './style.css';
 function App() {
   const [tickets, setTickets] = useState([]); 
@@ -47,16 +47,21 @@ function App() {
 
   //   })
   // },[value])
-
+  // alert(tickets)
+  console.log(tickets)
+  console.log(tickets.length)
+  if(tickets === []){
+    return 
+  }
   return (
     <div className="App">
       <div className="headerDiv">
-        <input placeholder="wirte a text to serche" onChange={(e) =>((changeValue(e)))} ></input>
-        <div className={"restore"}>showing {tickets.length}results({count} hidden <button className="restoreButton" onClick={restoreFunc}>restore</button>)</div>
+        <input id="searchInput" placeholder="wirte a text to serche" onChange={(e) =>((changeValue(e)))} ></input>
+        <div className={"restore"}>showing {tickets.length}results(<span id={"hideTicketsCounter"} >{count}</span> hidden <button className="restoreButton" id="restoreHideTickets" onClick={restoreFunc}>restore</button>)</div>
      </div>
       {tickets.map((x,i)=>{
         return(
-        <Tickets1 
+        <Tickets
         content={x.content}
           title={x.title}
           date={x.creationTime}

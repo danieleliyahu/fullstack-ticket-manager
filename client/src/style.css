@@ -57,3 +57,18 @@
 .headerDiv{
     text-align: center;
 }
+span + span {
+    margin-left: 10px;
+}
+.show{
+    color: blue;
+    cursor: pointer;
+}
+.hideTicketButton {
+    display: block;
+    border: none;
+    background: none;
+    margin-left: auto;
+    outline: none;
+    cursor: pointer;
+}
