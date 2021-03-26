@@ -11,20 +11,21 @@ app.use(express.static("client/build"));
 app.get('/api/tickets',async(req,res,next) => {
     const params = new URLSearchParams(req.query)
     console.log(params.toString())
+    console.log(params)
     console.log("????")
 
     if(params.toString()=== ""){
       // console.log(`${params}    params`)
       // console.log(`${req.query}      req.query`)
         const tickets = await Tickets.find({});
-        console.log("dsssdsd")
+        console.log(tickets.length)
         // console.log(tickets)
         
-        return res.send(tickets)
+        return res.send(tickets);
     }else{
-        const tickets = await Tickets.find({title:{$regex : `.*${params.get('searchText')}.*`}});
+        const tickets = await Tickets.find({title:{$regex : `.*${params.get('searchText')}.*`,$options:'i'}});
         // const myParam = urlParams.get('myParam');
-        console.log(tickets.length+100)
+        console.log(tickets.length)
         // console.log(`hhhhhhhhhhhhhhh ${tickets.length}`)
         // console.log(`${params} PARAMSSSS`)
         for (const [key,value] of params) {

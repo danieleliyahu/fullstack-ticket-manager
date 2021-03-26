@@ -11,8 +11,12 @@ function App() {
   const [restore, setrestore] = useState(0)
    const changeValue = (e) => {
     const newValue = e.target.value;
-    setValue(newValue)
-  }
+    axios.get(`/api/tickets?searchText=${newValue}`)
+    .then(({data})=>{
+      console.log('hiiiiiiii')
+      setTickets(data)
+  })
+}
 
 
     const restoreFunc = () =>{
@@ -31,56 +35,25 @@ function App() {
     }
   }
   useEffect(() => {
-    // if(value !== undefined){
-
-    // }
     console.log('hiiiiiiiiiiiiiii')
     axios.get(`/api/tickets`)
     .then(({data})=>{
       console.log(data)
       setTickets(data)
-    })
+    }).catch((e) => {console.log(e)})
   },[])
 
-  useEffect(() => {
-    // if(value !== undefined){
+  // useEffect(() => {
 
-    // }
-    axios.get(`/api/tickets?searchText=${value}`)
-    .then(({data})=>{
-      console.log('hiiiiiiii')
-      setTickets(data)
-    })
-  },[value])
-  // const addCount = () => { //count function that will be used in the ticket componenet to update the count of hidden tickets
-  //   setCounter((prev) => prev + 1);
-  // };
-  // const restore = async () => { //restore function to display hidden tickets
-  //   setCall((prev) => prev + 1);
-  //   setCounter(0);
-  // };
-  // const hiddenItems = () => { //if there is hidden tickets displayng the count of them and button to restore them
-  //   if (counter === 0) {
-  //     return '';
-  //   }
-  //   return (
-  //     <span className="counterHidden">
-  //       &nbsp;
-  //       (&nbsp;
-  //       <span id="hideTicketsCounter" className="hideTicketsCounter">{counter}</span>
-  //       &nbsp;
-  //       hidden tickets -
-  //       <button onClick={restore} id="restoreHideTickets">restore</button>
-  //       )
-  //     </span>
-  //   );
-  // };
-// console.log(tickets)
+  //   })
+  // },[value])
+
   return (
     <div className="App">
-      {count}
-      <input onChange={(e) =>((changeValue(e)))} ></input>
-      <button onClick={restoreFunc}>restore</button>
+      <div className="headerDiv">
+        <input placeholder="wirte a text to serche" onChange={(e) =>((changeValue(e)))} ></input>
+        <div className={"restore"}>showing {tickets.length}results({count} hidden <button className="restoreButton" onClick={restoreFunc}>restore</button>)</div>
+     </div>
       {tickets.map((x,i)=>{
         return(
         <Tickets1 

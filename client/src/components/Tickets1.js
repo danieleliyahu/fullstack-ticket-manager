@@ -6,8 +6,15 @@ const Tickets1 = ({content,title,date,labels,done,userEmail,seeMoreAndLess,
         let dateFormat = new Date(date.creationTime).toLocaleString();
         const [contentClass, setContentClass] = useState('content contentClose')
         const [ticketClass, setticketClass] = useState('ticket')
+        const [doneClass, setdoneClass] = useState('undone')
         const doneFunc = () =>{
-            axios.patch(`/api/tickets/${ticket._id}`,{done: true})
+            if(doneClass=== "undone"){
+                axios.patch(`/api/tickets/${ticket._id}`,{done: true})
+                setdoneClass('done')
+            }else{
+                axios.patch(`/api/tickets/${ticket._id}`,{done: false})
+                setdoneClass('undone')
+            }
             
             // .then(({data}) =>{
             //     if(!data.done){
@@ -32,8 +39,8 @@ const Tickets1 = ({content,title,date,labels,done,userEmail,seeMoreAndLess,
         }
     return (
         
-    <div >
-        <div className={ticketClass} key={key}>
+    <div>
+        <div className={`${ticketClass}  ${doneClass}`} key={key}>
             <button id="hidebutton" onClick={counter}>hide</button>
             <h3 className="title"> {title}</h3>
             <p className={contentClass} > {content}</p>

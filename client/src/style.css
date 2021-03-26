@@ -36,3 +36,24 @@
 .hiden{
     display: none;
 }
+.done{
+    background-color: #008000a8;
+    color: rgb(53 68 72);
+}
+.undone{
+    background-color: #ff0000a6;
+}
+.restore{
+    color: rgb(80, 112, 121);
+    font-size: 0.7em;
+}
+.restoreButton{
+    border: none;
+    background-color:white;
+    color:blue;
+    outline: none;
+    cursor: pointer;
+}
+.headerDiv{
+    text-align: center;
+}
