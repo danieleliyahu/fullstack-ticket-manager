@@ -1,7 +1,6 @@
 
 ## ticket manager
 
-heroku link : https://fullstack-ticket-manager.herokuapp.com/
 
 ## Features
 
@@ -14,8 +13,12 @@ heroku link : https://fullstack-ticket-manager.herokuapp.com/
 
 ```sh
 npm i 
+npm run seed
+npm run dev
+
 cd ./client
-npm i
+npm i 
+npm start
 ```
 
 For production environments...
